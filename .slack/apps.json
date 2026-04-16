@@ -1,0 +1,10 @@
+{
+  "apps": {
+    "T01T032RDAA": {
+      "app_id": "A0ARRD640QN",
+      "team_domain": "tessellworkspace",
+      "team_id": "T01T032RDAA"
+    }
+  },
+  "default": "tessellworkspace"
+}
