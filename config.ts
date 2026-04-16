@@ -9,7 +9,6 @@ export const config: Config = {
     {
       description: "Metadata Repo: Dev Access",
       // ACL: tag:metadata-repo-dev — port 5432 (Postgres)
-      // Admin group: group:ts-metadata-repo-dev-admins
       attribute: "custom:metadataRepoDevAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -23,7 +22,6 @@ export const config: Config = {
     {
       description: "Metadata Repo: QA Access",
       // ACL: tag:metadata-repo-qa — port 5432 (Postgres)
-      // Posture used by: group:ts-monitoring-dashboard-qa-users (see posture:accessbotTestPosture)
       attribute: "custom:metadataRepoQaAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -34,7 +32,6 @@ export const config: Config = {
     {
       description: "Metadata Repo: Stage Access",
       // ACL: tag:metadata-repo-stage — port 5432 (Postgres)
-      // Regular approvers: group:ts-metadata-repo-stage-admins, group:ts-metadata-repo-stage-dba
       attribute: "custom:metadataRepoStageAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -47,7 +44,6 @@ export const config: Config = {
     {
       description: "Metadata Repo: Production Access",
       // ACL: tag:metadata-repo-prod — tightly restricted
-      // Approvers: group:ts-metadata-repo-prod-admins, group:ts-metadata-repo-prod-dba
       attribute: "custom:metadataRepoProdAccess",
       maxSeconds: 8 * 3600, // 8 hours — shorter window for production
       approverEmails: [
@@ -86,7 +82,6 @@ export const config: Config = {
     },
     {
       description: "Dashboards: QA Access",
-      // ACL: group:ts-monitoring-qa-admins has full access to all QA dashboards
       attribute: "custom:dashboardsQaAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -96,7 +91,6 @@ export const config: Config = {
     },
     {
       description: "Dashboards: Stage Access",
-      // ACL: group:ts-monitoring-stage-admins has full access to all Stage dashboards
       attribute: "custom:dashboardsStageAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -108,7 +102,6 @@ export const config: Config = {
     },
     {
       description: "Dashboards: Production Access",
-      // ACL: group:ts-monitoring-prod-admins has full access to all Prod dashboards
       // Note: Public ports (9090, 9091, 8080, 8429, 8481) are open to autogroup:member already
       attribute: "custom:dashboardsProdAccess",
       maxSeconds: 8 * 3600, // 8 hours — shorter window for production
@@ -133,7 +126,6 @@ export const config: Config = {
     {
       description: "K8s Cluster: Dev Admin Access",
       // ACL: autogroup:member removed from existing grant; posture gates JIT admin access
-      // Explicit group: group:ts-dev-cluster-admins retains permanent access
       attribute: "custom:k8sDevAdminAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -145,7 +137,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: Dev Readonly Access",
-      // ACL: group:ts-dev-cluster-readonly-users → tag:dev-kube-api-server-with-readonly-access
       attribute: "custom:k8sDevReadonlyAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -157,7 +148,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: QA Admin Access",
-      // ACL: group:ts-qa-cluster-admins → tag:qa-kube-api-server-with-admin-access
       attribute: "custom:k8sQaAdminAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -170,7 +160,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: QA Readonly Access",
-      // ACL: group:ts-qa-cluster-readonly-users → tag:qa-kube-api-server-with-readonly-access
       attribute: "custom:k8sQaReadonlyAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -183,7 +172,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: Stage Admin Access",
-      // ACL: group:ts-stage-cluster-admins → tag:stage-kube-api-server-with-admin-access
       attribute: "custom:k8sStageAdminAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -196,7 +184,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: Stage Readonly Access",
-      // ACL: group:ts-stage-cluster-readonly-users → tag:stage-kube-api-server-with-readonly-access
       attribute: "custom:k8sStageReadonlyAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -209,7 +196,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: Production Admin Access",
-      // ACL: group:ts-prod-cluster-admins → tag:prod-kube-api-server-with-admin-access
       attribute: "custom:k8sProdAdminAccess",
       maxSeconds: 8 * 3600, // 8 hours — shorter window for production
       approverEmails: [
@@ -223,7 +209,6 @@ export const config: Config = {
     },
     {
       description: "K8s Cluster: Production Readonly Access",
-      // ACL: group:ts-prod-cluster-readonly-users → tag:prod-kube-api-server-with-readonly-access
       attribute: "custom:k8sProdReadonlyAccess",
       maxSeconds: 8 * 3600, // 8 hours
       approverEmails: [
@@ -236,43 +221,11 @@ export const config: Config = {
     },
 
     // -------------------------------------------------------------------------
-    // OPS Platform access profiles
-    // Covers: ops-app, ops-mongo, ops-pgsync (dev and prod)
-    // -------------------------------------------------------------------------
-    {
-      description: "OPS Platform: Dev Access",
-      // ACL: group:ts-ops-platform-dev → ops-metabase-dev, ops-metabase-qa
-      // Covers: ops-app-dev, ops-mongo-dev, ops-pgsync-dev
-      attribute: "custom:opsPlatformDevAccess",
-      maxSeconds: 3 * 86400, // 3 days
-      approverEmails: [
-        "chaitanya.naik@tessell.com",
-        "sreejith.kesavan@tessell.com"
-      ],
-      // notifyChannel: "",
-    },
-    {
-      description: "OPS Platform: Production Access",
-      // ACL: group:ts-tessell-ops-prod-admins → ops-mongo-prod, tessell-ops-lambda-prod, etc.
-      // ACL: group:ts-ops-platform-admins → ops-pgsync-prod
-      attribute: "custom:opsPlatformProdAccess",
-      maxSeconds: 8 * 3600, // 8 hours
-      approverEmails: [
-        "sreejith.kesavan@tessell.com",
-        "chaitanya.naik@tessell.com",
-        "srivatsan.vijayaraghavan@tessell.com"
-      ],
-      canSelfApprove: false,
-      // notifyChannel: "",
-    },
-
-    // -------------------------------------------------------------------------
     // Infra Repo access profiles
     // tag:infra-repo — MS Metadata / infra repo Postgres DB
     // -------------------------------------------------------------------------
     {
       description: "Mothersite Repo: DBA Access",
-      // ACL: group:ts-infra-repo-dba → tag:infra-repo port 5432
       attribute: "custom:infraRepoDbaAccess",
       maxSeconds: 3 * 86400, // 3 days
       approverEmails: [
@@ -284,7 +237,6 @@ export const config: Config = {
     },
     {
       description: "Mothersite Repo: Admin Access",
-      // ACL: group:ts-infra-repo-admin → tag:infra-repo all ports
       attribute: "custom:infraRepoAdminAccess",
       maxSeconds: 86400, // 1 day
       approverEmails: [
